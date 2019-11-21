@@ -16,7 +16,7 @@
       uri:
         url: http://{{ gogs_hostname }}/api/v1/admin/users
         method: POST
-        body: "{'login_name': '{{ my_user }}', 'username': '{{ my_user }}', 'email': '{{ my_user }}@bouyguestelecom.fr', 'password': 'openshift'}'}"
+        body: "{'login_name': '{{ my_user }}', 'username': '{{ my_user }}', 'email': '{{ my_user }}@bouyguestelecom.fr', 'password': 'openshift'}"
         body_format: json
         user: "{{ infrasvcs_adm_user }}"
         password: "{{ infrasvcs_adm_password }}"
@@ -49,8 +49,8 @@
     - name: Push {{ reponame }} to git repository in Gogs for user "{{ my_user }}"
       shell: |
         git remote add {{ my_user }} http://{{ my_user }}:openshift@{{ gogs_hostname }}/{{ my_user }}/{{ reponame }}.git
-        git config --local user.email "{{ my_user }}@example.com"
-        git config --local user.name "{{ my_user }}"
+        git config --local user.email "{{ my_user }}@bouyguestelecom.fr"
+        git config --local user.name "{{ my_user }}"
         git push -f --all {{ my_user }}
       args:
         chdir: "{{ apb_tmp_dir.path }}/{{ reponame }}"

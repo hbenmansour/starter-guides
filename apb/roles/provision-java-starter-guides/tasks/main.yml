@@ -73,6 +73,6 @@
   when: '"ocp-ops-view" in features_to_install'
 
 - include_tasks: per_user.yml
-  with_sequence: start=1 end={{ user_count }} format={{ user_format }}
+  loop: '{{ user_list.split(",") | lower }}'
 
 - include_tasks: track-workshop-deployment.yml
