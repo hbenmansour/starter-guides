@@ -40,4 +40,4 @@
   when: workshop_type == "php"
 
 - include_tasks: gogs-create-user-repo.yml
-  loop: '{{ user_list.split(",")[0] | lower }}'
+  loop: '{{ user_list.split(",") | lower }}'
