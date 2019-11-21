@@ -1,5 +1,5 @@
 ---
-master_url: "kubernetes.default"
+master_url: "kubernetes.default.svc"
 user_count: 5
 user_format: "user%d"
 namespace: ocp-workshop
