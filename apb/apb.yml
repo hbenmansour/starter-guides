@@ -53,8 +53,15 @@ plans:
       title: Number of participants
       description: Number of participants for the workshop. There will be provisioned infrastructure for each participant
       type: number
-      required: true
+      required: false
       display_group: Workshop
+    - name: user_list
+      title: List of participants
+      description: Comma separated user list
+      type: string
+      required: false
+      display_group: Workshop
+      
 #    - name: openshift_user_password
 #      title: OpenShift User Password
 #      description: The OpenShift password for participants to be displayed in the lab guide to participants

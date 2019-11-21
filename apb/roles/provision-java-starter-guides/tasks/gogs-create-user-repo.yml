@@ -3,7 +3,26 @@
   block:
     - set_fact:
         my_user: "{{ item }}"
+    - name: check if user '{{ my_user }}' exists
+      uri:
+        url: http://{{ gogs_hostname }}/api/v1/users/{{ my_user }}
+        user: "{{ infrasvcs_adm_user }}"
+        password: "{{ infrasvcs_adm_password }}"
+        force_basic_auth: true
+        status_code: 200,404
+      register: user_result
 
+    - name: create gogs user '{{ my_user }}'
+      uri:
+        url: http://{{ gogs_hostname }}/api/v1/admin/users
+        method: POST
+        body: "{'login_name': '{{ my_user }}', 'username': '{{ my_user }}', 'email': '{{ my_user }}@bouyguestelecom.fr', 'password': 'openshift'}'}"
+        body_format: json
+        user: "{{ infrasvcs_adm_user }}"
+        password: "{{ infrasvcs_adm_password }}"
+        status_code: 200,201
+        force_basic_auth: true
+      when: user_result.status != 200
     # Clone required project in Gogs
     #
     - name: Check if repository {{ reponame }} exists in git for user "{{ my_user }}"
